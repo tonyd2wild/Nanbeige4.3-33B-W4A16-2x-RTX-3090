@@ -1,0 +1,38 @@
+bench vs http://127.0.0.1:8017/v1 model=nanbeige4.3-33b @ 2026-10-25 19:10
+warmup: {'ttft': 0.08945655822753906, 'decode': 66.6039612373258, 'ntok': 400, 'ptok': 76, 'wall': 6.080091238021851}
+code c1: decode 66.2 tok/s  ttft 0.05s  agg 66 tok/s  ok=1 err=0
+code c2: decode 65.6 tok/s  ttft 0.09s  agg 129 tok/s  ok=2 err=0
+code c3: decode 64.9 tok/s  ttft 0.16s  agg 190 tok/s  ok=3 err=0
+code c4: decode 64.3 tok/s  ttft 0.19s  agg 250 tok/s  ok=4 err=0
+code c5: decode 62.0 tok/s  ttft 0.22s  agg 300 tok/s  ok=5 err=0
+code c6: decode 61.1 tok/s  ttft 0.26s  agg 354 tok/s  ok=6 err=0
+json c1: decode 64.2 tok/s  ttft 0.06s  agg 64 tok/s  ok=1 err=0
+json c2: decode 63.7 tok/s  ttft 0.10s  agg 125 tok/s  ok=2 err=0
+json c3: decode 62.6 tok/s  ttft 0.18s  agg 183 tok/s  ok=3 err=0
+json c4: decode 62.1 tok/s  ttft 0.22s  agg 240 tok/s  ok=4 err=0
+json c5: decode 59.9 tok/s  ttft 0.27s  agg 288 tok/s  ok=5 err=0
+json c6: decode 59.4 tok/s  ttft 0.31s  agg 341 tok/s  ok=6 err=0
+prose c1: decode 62.2 tok/s  ttft 0.06s  agg 62 tok/s  ok=1 err=0
+prose c2: decode 61.8 tok/s  ttft 0.09s  agg 122 tok/s  ok=2 err=0
+prose c3: decode 60.8 tok/s  ttft 0.17s  agg 178 tok/s  ok=3 err=0
+prose c4: decode 60.6 tok/s  ttft 0.20s  agg 236 tok/s  ok=4 err=0
+prose c5: decode 58.4 tok/s  ttft 0.23s  agg 283 tok/s  ok=5 err=0
+prose c6: decode 57.9 tok/s  ttft 0.27s  agg 335 tok/s  ok=6 err=0
+math c1: decode 61.1 tok/s  ttft 0.08s  agg 60 tok/s  ok=1 err=0
+math c2: decode 60.7 tok/s  ttft 0.12s  agg 119 tok/s  ok=2 err=0
+math c3: decode 60.2 tok/s  ttft 0.23s  agg 175 tok/s  ok=3 err=0
+math c4: decode 59.8 tok/s  ttft 0.29s  agg 230 tok/s  ok=4 err=0
+math c5: decode 58.0 tok/s  ttft 0.34s  agg 277 tok/s  ok=5 err=0
+math c6: decode 57.6 tok/s  ttft 0.41s  agg 327 tok/s  ok=6 err=0
+narrative c1: decode 60.6 tok/s  ttft 0.06s  agg 60 tok/s  ok=1 err=0
+narrative c2: decode 60.2 tok/s  ttft 0.11s  agg 119 tok/s  ok=2 err=0
+narrative c3: decode 59.6 tok/s  ttft 0.19s  agg 174 tok/s  ok=3 err=0
+narrative c4: decode 59.5 tok/s  ttft 0.23s  agg 230 tok/s  ok=4 err=0
+narrative c5: decode 57.8 tok/s  ttft 0.28s  agg 278 tok/s  ok=5 err=0
+narrative c6: decode 57.6 tok/s  ttft 0.32s  agg 331 tok/s  ok=6 err=0
+prefill code: 17074 tok in 9.66s = 1767 tok/s
+prefill json: 17092 tok in 9.67s = 1767 tok/s
+prefill prose: 17073 tok in 9.67s = 1765 tok/s
+prefill math: 17122 tok in 9.64s = 1777 tok/s
+prefill narrative: 17088 tok in 9.58s = 1783 tok/s
+wrote /home/tony/nanbeige/bench_c1c6_results.md

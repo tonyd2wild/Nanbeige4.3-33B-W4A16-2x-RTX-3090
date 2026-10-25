@@ -1,0 +1,12 @@
+Nanbeige4.3-33B-W4A16-2x-RTX-3090
+Copyright 2026 Tony DeAngelo (Tech2Wild / 2Wild)
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party provenance:
+- Nanbeige/Nanbeige4.3-33B (Apache 2.0, the Nanbeige team) is the base model; its weights are not in this repository.
+  The quantized weights live at https://huggingface.co/Tech2wild/Nanbeige4.3-33B-W4A16-AutoRound.
+- The quantization is done with Intel AutoRound (Apache 2.0, https://github.com/intel/auto-round), unmodified,
+  installed on top of the vllm/vllm-openai:v0.27.1 image (see quant/Dockerfile.autoround).
+- vLLM (Apache 2.0) serves the checkpoint unmodified with its GPTQ Marlin kernels; no vLLM source is vendored here.
+- bench/bench_c1c6.py is our own concurrency sweep script.
