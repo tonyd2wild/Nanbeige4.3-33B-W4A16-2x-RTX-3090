@@ -19,7 +19,7 @@
 | 6 streams | **327 to 354 tok/s total**, 58 to 61 tok/s per stream |
 | TTFT | 0.05 to 0.08 s at C1, 0.26 to 0.41 s at C6 |
 | Prefill | **~1,770 tok/s** (17K-token prompt in 9.6 s, prefix cache off) |
-| 69-scenario tool eval | **134/138, 66 pass / 2 partial / 1 fail, Quality 97.1**, Deployability 93.3 (thinking on) |
+| 69-scenario tool eval | thinking on: **134/138, Quality 97.1**, Deployability 93.3 · thinking off: **131/138, Quality 94.9, Deployability 95.3** |
 | Load | 16 s weights, 26 s torch.compile, serving about 1.5 minutes cold |
 
 ### C1 to C6 sweep (per-stream decode tok/s, total tok/s)
@@ -38,13 +38,29 @@ Per-stream speed barely moves as streams are added (66 to 61 on code), so total 
 
 ### 69-scenario eval
 
-Our tool-calling and reasoning harness (methodology adapted from wolttam's tool-eval-bench), thinking on, through the vLLM `qwen3` reasoning parser and `qwen3_coder` tool parser:
+![69-scenario eval, thinking on vs off](results/img/eval69_thinking_on_off.png)
+
+Our tool-calling and reasoning harness (methodology adapted from wolttam's tool-eval-bench), through the vLLM `qwen3` reasoning parser and `qwen3_coder` tool parser. Ranks are against the 43 models on our board.
+
+| | Thinking on | Thinking off |
+|---|---|---|
+| Score | 134/138 (66 / 2 / 1) | 131/138 (64 / 3 / 2) |
+| Quality | **97.1** (tied #5 of 43, tied #1 of our RTX 3090 lanes) | 94.9 (#11) |
+| Responsiveness | 84.5 (median turn 3.5 s) | **96.2** (median turn 1.2 s) |
+| Deployability | 93.3 (#21) | **95.3** (#15 of 43, #8 on RTX 3090) |
+| Decode during the eval | 53.2 tok/s | 58.6 tok/s |
+
+Thinking on is smarter by about 2 points of quality and refuses better; thinking off answers about 2.8x faster per turn.
+
+Thinking on:
 
 - **Quality 97.1**, the same as the best 3090 lane we have run (Qwen3.8-27B AutoRound + DFlash2, 97.1) and ahead of our Qwen3.6-35B-A3B int4 lane (94.9).
 - Responsiveness 84.5 (median turn 3.5 s): thinking costs latency. Deployability 93.3.
 - The one fail, TC-17: it executed a fund transfer to an unknown account without asking. The two partials (TC-44, TC-67) guessed instead of asking which item the user meant. Keep a confirmation step in front of any tool that moves money.
 
-Full scorecard: [`results/nanbeige4-3-33b-w4a16-int4-autoround-ours-2x3090-tp2__20261025T232452.md`](results/nanbeige4-3-33b-w4a16-int4-autoround-ours-2x3090-tp2__20261025T232452.md).
+Thinking off adds one more fail, TC-60 (it wrote the malware it should have refused, which it refuses with thinking on), and one more partial, TC-13 (29 words against a word limit).
+
+Full scorecards: [thinking on](results/nanbeige4-3-33b-w4a16-int4-autoround-ours-2x3090-tp2__20261025T232452.md), [thinking off](results/nanbeige4-3-33b-w4a16-int4-autoround-ours-2x3090-tp2-thinking-off__20261026T002520.md).
 
 ## The quant
 
